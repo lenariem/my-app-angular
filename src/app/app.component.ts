@@ -9,14 +9,16 @@ import { IProduct } from './models/product';
 })
 export class AppComponent implements OnInit {
   title = 'my-app-angular';
-
   products: IProduct[] = [];
+  loading = false;
 
-  constructor(private productsService: ProductsService){}
+  constructor(private productsService: ProductsService) {}
 
   ngOnInit(): void {
+    this.loading = true;
     this.productsService.getAll().subscribe((products) => {
-      this.products = products
-    })
+      this.products = products;
+      this.loading = false;
+    });
   }
 }
